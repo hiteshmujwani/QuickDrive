@@ -21,6 +21,20 @@ const FilePreview = () => {
     }
   };
 
+  const handleSendEmail = async () => {
+    const response = await axios.post(
+      "/api/send-email",
+      {
+        toEmail: "hiteshmujwani@gmail.com",
+        fileUrl: file.fileUrl,
+      },
+      { headers: { "Content-Type": "application/json" } }
+    );
+
+    const data = await response.data;
+    console.log(data);
+  };
+
   const handleSavePasword = async () => {
     if (password.trim() == "") {
       alert("Please enter password");
@@ -122,7 +136,10 @@ const FilePreview = () => {
                 className="w-full p-2 rounded-lg border-[1px] border-purple-600"
               />
             </div>
-            <button className="bg-purple-600 p-3 rounded-lg text-white font-medium">
+            <button
+              onClick={handleSendEmail}
+              className="bg-purple-600 p-3 rounded-lg text-white font-medium"
+            >
               Send Email
             </button>
           </div>
