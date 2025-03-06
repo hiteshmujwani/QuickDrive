@@ -10,6 +10,7 @@ import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { AnimatedCircularProgressBar } from "@/components/magicui/animated-circular-progress-bar";
 import { toast } from "sonner";
+import { UPLOAD_FILE } from "@/app/constant/ApiUrls";
 
 const FileUploadForm = () => {
   const [selectedFile, setSelectedFile] = useState("");
@@ -41,7 +42,7 @@ const FileUploadForm = () => {
       password: "",
     };
 
-    const response = await axios.post("/api/createfiledoc", {
+    const response = await axios.post(UPLOAD_FILE, {
       ...bodyData,
     });
 

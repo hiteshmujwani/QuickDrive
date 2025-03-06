@@ -1,4 +1,5 @@
 "use client";
+import { GET_FILE_PUBLIC } from "@/app/constant/ApiUrls";
 import { Particles } from "@/components/magicui/particles";
 import axios from "axios";
 import { FileDown } from "lucide-react";
@@ -12,7 +13,7 @@ const F = () => {
   const [isPasswordMatched, setIsPasswordMatched] = useState(false);
 
   const fetchFile = async () => {
-    const response = await axios.get(`/api/getfiledoc?fileId=${fileId}`);
+    const response = await axios.get(`${GET_FILE_PUBLIC}?fileId=${fileId}`);
     if (response.data.success) {
       setFile(response.data.file);
     }
@@ -41,8 +42,6 @@ const F = () => {
     if (fileId) {
       fetchFile();
     }
-
-    console.log(file);
   }, []);
 
   return (

@@ -3,32 +3,30 @@ import connectDB from "../../utils/db";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
-  await connectDB();
-  const {
-    fileName,
-    fileFormat,
-    shortUrl,
-    fileId,
-    user,
-    fileSize,
-    fileUrl,
-    password,
-  } = await req.json();
+  try {
+    await connectDB();
 
-  const createdFile = await File.create({
-    fileName,
-    fileFormat,
-    shortUrl,
-    fileId,
-    user,
-    fileSize,
-    fileUrl,
-    password,
-  });
+    const fileData = await req.json();
 
-  return NextResponse.json({
-    message: "File created successfully",
-    success: true,
-    createdFile,
-  });
+    const createdFile = await File.create(fileData);
+
+    return NextResponse.json(
+      {
+        message: "File uploaded successfully",
+        success: true,
+        createdFile,
+      },
+      { status: 201 }
+    );
+  } catch (error) {
+    console.error("Error uploading file:", error);
+    return NextResponse.json(
+      {
+        message: "Failed to upload file",
+        success: false,
+        error: error.message,
+      },
+      { status: 500 }
+    );
+  }
 }

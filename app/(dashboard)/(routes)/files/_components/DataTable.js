@@ -35,7 +35,9 @@ const DataTable = ({ files }) => {
                   <a href={item.fileUrl}>{item.fileName}</a>
                 </TableCell>
                 <TableCell>{item.fileFormat}</TableCell>
-                <TableCell className="">{item.fileSize}</TableCell>
+                <TableCell className="">
+                  {(item.fileSize / 1000 / 1000).toFixed(2) + " MB"}
+                </TableCell>
                 <TableCell className="text-center">
                   <ActionPopup file={item}>
                     <Ellipsis />
@@ -67,7 +69,10 @@ const DataTable = ({ files }) => {
                         : item.fileName}
                     </a>
                     <div className="flex gap-1">
-                      <div>{item.fileFormat}</div> / <div>{item.fileSize}</div>
+                      <div>{item.fileFormat}</div> /{" "}
+                      <div>
+                        {(item.fileSize / 1000 / 1000).toFixed(2) + " MB"}
+                      </div>
                     </div>
                   </div>
                 </TableCell>

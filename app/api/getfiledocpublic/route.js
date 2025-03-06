@@ -7,27 +7,27 @@ export async function GET(req) {
     await connectDB();
 
     const { searchParams } = new URL(req.url);
-    const user = searchParams.get("user");
+    const fileId = searchParams.get("fileId");
 
-    if (!user) {
+    if (!fileId) {
       return NextResponse.json(
-        { success: false, message: "Something Went Wrong !" },
+        { success: false, message: "Something Went Wrong Try Again !" },
         { status: 400 }
       );
     }
 
-    const files = await File.find({ user });
+    const file = await File.findOne({ fileId });
 
-    if (!files.length) {
+    if (!file) {
       return NextResponse.json(
-        { success: false, message: "No files found" },
+        { success: false, message: "File not found" },
         { status: 404 }
       );
     }
 
-    return NextResponse.json({ success: true, files }, { status: 200 });
+    return NextResponse.json({ success: true, file }, { status: 200 });
   } catch (error) {
-    console.error("Error fetching user files:", error);
+    console.error("Error getting file:", error);
     return NextResponse.json(
       {
         success: false,
