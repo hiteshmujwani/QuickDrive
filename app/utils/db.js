@@ -2,9 +2,7 @@ const { default: mongoose } = require("mongoose");
 
 const connectDB = async () => {
   const db = await mongoose
-    .connect(
-      "mongodb+srv://hiteshmujwaniofficial:hitevya@cluster0.8cnvzue.mongodb.net/quickdrive"
-    )
+    .connect(process.env.NEXT_PUBLIC_MONGO_URI)
     .then((conn) => conn.connection.host)
     .catch((err) => console.log(err));
 };
