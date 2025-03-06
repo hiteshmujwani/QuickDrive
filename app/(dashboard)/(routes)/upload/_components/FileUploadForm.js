@@ -9,6 +9,7 @@ import axios from "axios";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { AnimatedCircularProgressBar } from "@/components/magicui/animated-circular-progress-bar";
+import { toast } from "sonner";
 
 const FileUploadForm = () => {
   const [selectedFile, setSelectedFile] = useState("");
@@ -32,7 +33,7 @@ const FileUploadForm = () => {
     const bodyData = {
       fileName: selectedFile?.name,
       fileFormat: selectedFile?.type,
-      shortUrl: `http://localhost:3000/f/${uploadedData.public_id}`,
+      shortUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/f/${uploadedData.public_id}`,
       fileId: uploadedData.public_id,
       user: user.user.emailAddresses[0].emailAddress,
       fileSize: uploadedData.bytes,
@@ -49,6 +50,7 @@ const FileUploadForm = () => {
       setIsUploading(false);
       setSelectedFile("");
       setProgress(0);
+      toast.success("File uploaded successfully", { position: "top-center" });
       router.push(`/file-preview/${response.data.createdFile.fileId}`);
     } else {
       setIsUploading(false);
@@ -158,6 +160,7 @@ const FileUploadForm = () => {
           </div>
         </div>
       )}
+
       <FileUploadButton
         disabled={selectedFile && !isUploading ? false : true}
         uploadFile={handleUploadFile}

@@ -10,6 +10,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Ellipsis } from "lucide-react";
+import ActionPopup from "./ActionPopup";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const DataTable = ({ files }) => {
   return files.length > 0 ? (
@@ -35,7 +37,9 @@ const DataTable = ({ files }) => {
                 <TableCell>{item.fileFormat}</TableCell>
                 <TableCell className="">{item.fileSize}</TableCell>
                 <TableCell className="text-center">
-                  <Ellipsis />
+                  <ActionPopup file={item}>
+                    <Ellipsis />
+                  </ActionPopup>
                 </TableCell>
               </TableRow>
             ))}
@@ -58,7 +62,9 @@ const DataTable = ({ files }) => {
                 <TableCell>
                   <div className="flex flex-col">
                     <a href={item.fileUrl} className="font-medium">
-                      {item.fileName}
+                      {item.fileName.length > 30
+                        ? item.fileName.substring(0, 30) + "..."
+                        : item.fileName}
                     </a>
                     <div className="flex gap-1">
                       <div>{item.fileFormat}</div> / <div>{item.fileSize}</div>
@@ -66,7 +72,9 @@ const DataTable = ({ files }) => {
                   </div>
                 </TableCell>
                 <TableCell className="font-medium">
-                  <Ellipsis />
+                  <ActionPopup file={item}>
+                    <Ellipsis />
+                  </ActionPopup>
                 </TableCell>
               </TableRow>
             ))}

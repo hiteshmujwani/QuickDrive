@@ -2,7 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "./_components/Header";
 import { ClerkProvider } from "@clerk/nextjs";
-import { DotPattern } from "@/components/magicui/dot-pattern";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,6 +28,7 @@ export default function RootLayout({ children }) {
         >
           <Header />
           <div className="h-[calc(100vh-10vh)]">{children}</div>
+          <Toaster />
         </body>
       </html>
     </ClerkProvider>
