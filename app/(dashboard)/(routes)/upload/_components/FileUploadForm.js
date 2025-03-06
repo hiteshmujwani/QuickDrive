@@ -3,8 +3,6 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import FileUploadButton from "./FileUploadButton";
-import { getStorage, ref } from "firebase/storage";
-import { app } from "../../../../../firebaseConfig";
 import axios from "axios";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
