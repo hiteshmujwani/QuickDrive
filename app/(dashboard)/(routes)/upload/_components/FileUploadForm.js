@@ -62,7 +62,7 @@ const FileUploadForm = () => {
     formData.append("upload_preset", "File_Preset");
 
     const response = await axios.post(
-      "https://api.cloudinary.com/v1_1/dtje2rtke/upload",
+      "https://api.cloudinary.com/v1_1/dtje2rtke/raw/upload",
       formData,
       {
         onUploadProgress: (progressEvent) => {
